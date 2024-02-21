@@ -1,0 +1,11 @@
+{
+  "name": "test-laravel",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "bash bin/dev"
+  },
+  "devDependencies": {
+    "axios": "^1.6.7"
+  }
+}
