@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AppController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +20,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/', [ AppController::class, 'test' ]);
 Route::get('test', [ AppController::class, 'test' ]);
-
