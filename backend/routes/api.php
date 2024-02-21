@@ -20,3 +20,4 @@ use App\Http\Controllers\AppController;
 // });
 
 Route::get('/app/load', [ AppController::class, 'load' ]);
+Route::get('/app/stream', [ AppController::class, 'stream' ]);
