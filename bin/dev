@@ -2,6 +2,10 @@
 
 reset
 
+if [ ! -f "./.docker/backend/.env" ]; then
+    cp "./.docker/backend/.env_example" "./.docker/backend/.env"
+fi
+
 # if [ ! -f ".env" ]; then
 #     ROOT_MAIL_DEFAULT="main@grr.la"
 #     ROOT_PASS_DEFAULT="main@grr.la"
