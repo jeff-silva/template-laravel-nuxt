@@ -2,34 +2,24 @@
 
 reset
 
+if [ ! -f "./.env" ]; then
+    cp "./.env_example" "./.env"
+fi
+
 if [ ! -f "./.docker/backend/.env" ]; then
     cp "./.docker/backend/.env_example" "./.docker/backend/.env"
 fi
 
-# if [ ! -f ".env" ]; then
-#     ROOT_MAIL_DEFAULT="main@grr.la"
-#     ROOT_PASS_DEFAULT="main@grr.la"
+if [ ! -f "./.docker/frontend/.env" ]; then
+    cp "./.docker/frontend/.env_example" "./.docker/frontend/.env"
+fi
 
-#     read -p "Digite o email do usuário root: (Default: ${ROOT_MAIL_DEFAULT}) " root_mail
-#     read -s -p "Digite a senha do usuário root: (Default: ${ROOT_PASS_DEFAULT}) " root_pass
+if [ ! -f "./.docker/mysql/.env" ]; then
+    cp "./.docker/mysql/.env_example" "./.docker/mysql/.env"
+fi
 
-#     if [ -z "$root_mail" ]; then
-#         root_mail=$ROOT_MAIL_DEFAULT
-#     fi
-
-#     if [ -z "$root_pass" ]; then
-#         root_pass=$ROOT_PASS_DEFAULT
-#     fi
-
-#     echo "E-mail: ${root_mail} | Senha: ${root_pass}";
-
-#     cp ".env_example" ".env"
-#     sed -i "s/APP_ADMIN_MAIL=.*/APP_ADMIN_MAIL=$root_mail/" .env
-#     sed -i "s/APP_ADMIN_PASS=.*/APP_ADMIN_PASS=$root_pass/" .env
-# fi
-
-# source .env
-
-# cp ".env" "./backend/.env"
+if [ ! -f "./.docker/phpmyadmin/.env" ]; then
+    cp "./.docker/phpmyadmin/.env_example" "./.docker/phpmyadmin/.env"
+fi
 
 docker-compose up --build --force-recreate --remove-orphans
