@@ -3,7 +3,10 @@ export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
   // app: { baseURL: '/xxx/' },
-  modules: [],
+
+  modules: [
+    ['@pinia/nuxt', {}],
+  ],
 
   runtimeConfig: {
     public: {

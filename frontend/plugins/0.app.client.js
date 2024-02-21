@@ -2,7 +2,6 @@ import axios from "axios";
 
 export default defineNuxtPlugin(async (nuxtApp) => {
     const conf = useRuntimeConfig();
-    console.log(conf);
 
     axios.interceptors.request.use((config) => {
         if (config.url.startsWith("/api")) {
@@ -15,5 +14,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
                 config.headers["Authorization"] = `Bearer ${access_token}`;
             }
         }
+
+        return config;
     });
 });

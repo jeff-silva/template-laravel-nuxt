@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
-    public function test(Request $request)
+    public function load(Request $request)
     {
-        return [];
+        $data['dev'] = env('APP_DEBUG') == true;
+        $data['settings'] = (object) [];
+        $data['user'] = false;
+        return $data;
     }
 }

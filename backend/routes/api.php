@@ -15,9 +15,8 @@ use App\Http\Controllers\AppController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('/', [ AppController::class, 'test' ]);
-Route::get('/test', [ AppController::class, 'test' ]);
+Route::get('/app/load', [ AppController::class, 'load' ]);
