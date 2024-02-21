@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 class AppController extends Controller
 {
+
+    #[\Spatie\RouteAttributes\Attributes\Get('/app/load', name: 'app.load')]
     public function load(Request $request)
     {
         $data['dev'] = env('APP_DEBUG') == true;
@@ -15,6 +18,7 @@ class AppController extends Controller
         return $data;
     }
 
+    #[\Spatie\RouteAttributes\Attributes\Get('/app/stream', name: 'app.stream')]
     public function stream()
     {
         $sendData = function($event, $data = []) {

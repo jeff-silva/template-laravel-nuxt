@@ -19,5 +19,5 @@ use App\Http\Controllers\AppController;
 //     return $request->user();
 // });
 
-Route::get('/app/load', [ AppController::class, 'load' ]);
-Route::get('/app/stream', [ AppController::class, 'stream' ]);
+// Route::get('/app/load', [ AppController::class, 'load' ]);
+// Route::get('/app/stream', [ AppController::class, 'stream' ]);
