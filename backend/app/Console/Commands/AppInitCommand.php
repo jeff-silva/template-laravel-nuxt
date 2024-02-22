@@ -30,5 +30,6 @@ class AppInitCommand extends Command
         Artisan::call('config:clear');
         Artisan::call('cache:clear');
         $this->call('app:migrate');
+        // $this->call('app:test');
     }
 }

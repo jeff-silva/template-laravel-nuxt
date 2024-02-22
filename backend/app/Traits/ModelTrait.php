@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-class ModelTrait
+trait ModelTrait
 {
     //
 }

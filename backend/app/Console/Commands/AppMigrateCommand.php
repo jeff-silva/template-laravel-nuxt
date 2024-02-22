@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Artisan;
@@ -35,7 +36,7 @@ class AppMigrateCommand extends Command
             $file = str_replace(base_path('/app'), 'App', $file);
             $file = str_replace('/', '\\', $file);
             return app($file);
-        }, \File::glob(app_path('Models/*.php')));
+        }, File::glob(app_path('Models/*.php')));
 
         // Delete all foreign keys
         $fks = DB::select("SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
