@@ -102,5 +102,11 @@ class AppMigrateCommand extends Command
                 });
             }
         }
+
+        foreach ($models as $model) {
+            if (method_exists($model, 'schemaSeed')) {
+                $model->schemaSeed();
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AppController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +19,10 @@ use App\Http\Controllers\AppController;
 //     return $request->user();
 // });
 
-// Route::get('/app/load', [ AppController::class, 'load' ]);
-// Route::get('/app/stream', [ AppController::class, 'stream' ]);
+Route::group([ 'middleware' => 'api' ], function() {
+    // Route::post('auth/login', [ AuthController::class, 'login' ]);
+    Route::post('auth/logout', [ AuthController::class, 'logout' ]);
+    Route::post('auth/refresh', [ AuthController::class, 'refresh' ]);
+    Route::post('auth/me', [ AuthController::class, 'me' ]);
+});
+

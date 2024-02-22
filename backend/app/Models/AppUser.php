@@ -5,29 +5,18 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\ModelTrait;
 use Laravel\Sanctum\HasApiTokens;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
 
 class AppUser extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable, ModelTrait;
 
     protected $table = 'app_user';
-
-    // public function schemaFields()
-    // {
-    //     return [
-    //         'id' => [ 'type' => 'id' ],
-    //         'name' => [ 'type' => 'string:255' ],
-    //         'email' => [ 'type' => 'string:255' ],
-    //         'password' => [ 'type' => 'string:255' ],
-    //         'created_at' => [ 'type' => 'datetime' ],
-    //         'updated_at' => [ 'type' => 'datetime' ],
-    //         'deleted_at' => [ 'type' => 'datetime' ],
-    //     ];
-    // }
 
     /**
      * The attributes that are mass assignable.
@@ -65,13 +54,31 @@ class AppUser extends Authenticatable implements JWTSubject
         return $this->getKey();
     }
 
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function schemaFields()
+    {
+        return [
+            'id' => fn($table) => $table->id(),
+            'name' => fn($table, $field) => $table->string($field, 255)->nullable(),
+            'email' => fn($table, $field) => $table->string($field, 255)->nullable(),
+            'password' => fn($table, $field) => $table->string($field, 255)->nullable(),
+            'email_verified_at' => fn($table, $field) => $table->dateTime($field)->nullable(),
+            'created_at' => fn($table, $field) => $table->dateTime($field)->nullable(),
+            'updated_at' => fn($table, $field) => $table->dateTime($field)->nullable(),
+            'deleted_at' => fn($table, $field) => $table->dateTime($field)->nullable(),
+        ];
+    }
+
+    public function schemaSeed()
+    {
+        $user = self::firstOrNew([ 'id' => 1 ]);
+        $user->name = 'Main User';
+        $user->email = 'main@grr.la';
+        $user->password = Hash::make('main@grr.la');
+        $user->save();
     }
 }
