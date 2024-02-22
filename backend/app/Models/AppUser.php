@@ -15,6 +15,19 @@ class AppUser extends Authenticatable implements JWTSubject
 
     protected $table = 'app_user';
 
+    // public function schemaFields()
+    // {
+    //     return [
+    //         'id' => [ 'type' => 'id' ],
+    //         'name' => [ 'type' => 'string:255' ],
+    //         'email' => [ 'type' => 'string:255' ],
+    //         'password' => [ 'type' => 'string:255' ],
+    //         'created_at' => [ 'type' => 'datetime' ],
+    //         'updated_at' => [ 'type' => 'datetime' ],
+    //         'deleted_at' => [ 'type' => 'datetime' ],
+    //     ];
+    // }
+
     /**
      * The attributes that are mass assignable.
      *
