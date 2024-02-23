@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -23,8 +23,27 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        // $this->reportable(function (Throwable $e) {
+        //     //
+        // });
+
+        $this->renderable(function (\Exception $e, $request) {
+            $response = [
+                'status' => 500,
+                'message' => $e->getMessage(),
+                'fields' => [],
+            ];
+
+            if (is_array($data = json_decode($e->getMessage(), true))) {
+                $response = array_merge($response, $data);
+            }
+
+            if (config('app.debug')) {
+                $response['file'] = $e->getFile();
+                $response['line'] = $e->getLine();
+            }
+
+            return response()->json($response, $response['status']);
         });
     }
 }

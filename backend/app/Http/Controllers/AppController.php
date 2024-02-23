@@ -14,7 +14,7 @@ class AppController extends Controller
         $data['dev'] = env('APP_DEBUG') == true;
         $data['datetime'] = date('Y-m-d H:i:s');
         $data['settings'] = (object) [];
-        $data['user'] = false;
+        $data['user'] = auth()->user();
         return $data;
     }
 

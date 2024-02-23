@@ -14,6 +14,7 @@ export default (options = {}) => {
     params: {},
     data: {},
     response: false,
+    events: [],
     ...options,
   };
 
@@ -22,8 +23,6 @@ export default (options = {}) => {
       options[attr] = computed(options[attr]);
     }
   });
-
-  let _events = [];
 
   const r = reactive({
     ...options,
@@ -103,13 +102,13 @@ export default (options = {}) => {
 
     on(events, callback) {
         (Array.isArray(events) ? events : [ events ]).map((event) => {
-            _events.push({ event, callback });
+            this.events.push({ event, callback });
         });
     },
 
     dispatch(eventsNames, arg1=null) {
         (Array.isArray(eventsNames) ? eventsNames : [ eventsNames ]).map((eventName) => {
-            _events.map(({ event, callback }) => {
+            this.events.map(({ event, callback }) => {
                 if (eventName != event) return;
                 callback(arg1);
             });
