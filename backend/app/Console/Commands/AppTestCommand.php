@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use ElephantIO\Client;
+use App\Events\TestEvent;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -31,7 +33,32 @@ class AppTestCommand extends Command
     public function handle()
     {
         // $this->info('aaa');
+        // $this->whatsappTest();
+        $this->websocketTest();
+    }
 
+    public function websocketTest()
+    {
+        $this->info('websocketTest');
+        // event(new TestEvent('Hello'));
+
+        $client = Client::create('http://localhost:8443', ['client' => Client::CLIENT_4X]);
+        $client->connect();
+        $client->emit('message', [
+            'test' => true,
+        ]);
+    }
+
+    public function whatsappTest()
+    {
+        $facebook_appid = '705141625145813';
+        $facebook_secret = '002174f1dd24d367fe01d9d7bfcbe33e';
+        $api_endpoint = "https://graph.facebook.com/v18.0/5531995271426/messages";
+        $this->info('whatsappTest');
+    }
+
+    public function crudTest()
+    {
         $test = \App\Models\AppTest::firstOrNew([ 'id' => 1 ]);
         $test->name = 'Test';
         $test->save();

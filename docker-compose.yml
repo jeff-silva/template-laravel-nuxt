@@ -13,7 +13,7 @@ volumes:
 services:
   backend:
     build: ./.docker/backend/
-    env_file: ./.docker/backend/.env
+    env_file: ./backend/.env
     volumes:
       - "./backend:/app"
     ports:
@@ -41,12 +41,23 @@ services:
 
   frontend:
     build: ./.docker/frontend
-    env_file: ./.docker/frontend/.env
+    env_file: ./frontend/.env
     command: bash -c "yarn install && yarn dev"
     ports:
       - ${VITE_PORT:-24678}:${VITE_PORT:-24678}
       - ${FRONTEND_PORT:-3000}:3000
     volumes:
       - "./frontend:/app"
+    networks:
+      - sail
+
+  websocket:
+    build: ./.docker/websocket
+    env_file: ./websocket/.env
+    command: bash -c "yarn install && yarn dev"
+    ports:
+      - ${WEBSOCKET_PORT:-8443}:80
+    volumes:
+      - "./websocket:/app"
     networks:
       - sail

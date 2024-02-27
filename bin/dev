@@ -2,24 +2,24 @@
 
 reset
 
-if [ ! -f "./.env" ]; then
-    cp "./.env_example" "./.env"
-fi
+folders=(
+  "."
+  "./.docker/backend"
+  "./.docker/frontend"
+  "./.docker/mysql"
+  "./.docker/phpmyadmin"
+  "./.docker/websocket"
+)
 
-if [ ! -f "./.docker/backend/.env" ]; then
-    cp "./.docker/backend/.env_example" "./.docker/backend/.env"
-fi
+for folder in "${folders[@]}"
+do
+  if [ ! -f "${folder}/.env_example" ]; then
+    continue
+  fi
 
-if [ ! -f "./.docker/frontend/.env" ]; then
-    cp "./.docker/frontend/.env_example" "./.docker/frontend/.env"
-fi
-
-if [ ! -f "./.docker/mysql/.env" ]; then
-    cp "./.docker/mysql/.env_example" "./.docker/mysql/.env"
-fi
-
-if [ ! -f "./.docker/phpmyadmin/.env" ]; then
-    cp "./.docker/phpmyadmin/.env_example" "./.docker/phpmyadmin/.env"
-fi
+  if [ ! -f "${folder}/.env" ]; then
+    cp "${folder}/.env_example" "${folder}/.env"
+  fi
+done
 
 docker-compose up --build --force-recreate --remove-orphans
