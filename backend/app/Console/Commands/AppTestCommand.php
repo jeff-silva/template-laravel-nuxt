@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
-use ElephantIO\Client;
+// use ElephantIO\Client;
+// use ElephantIO\Engine\SocketIO\Version1X;
+use SocketIO\Emitter;
 use App\Events\TestEvent;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -42,11 +44,13 @@ class AppTestCommand extends Command
         $this->info('websocketTest');
         // event(new TestEvent('Hello'));
 
-        $client = Client::create('http://localhost:8443', ['client' => Client::CLIENT_4X]);
-        $client->connect();
-        $client->emit('message', [
-            'test' => true,
-        ]);
+        // $client = Client::create('http://localhost:8443', ['client' => Client::CLIENT_4X]);
+        // $client->connect();
+        // $client->emit('message', [ 'test' => true ]);
+        // $client->disconnect();
+
+        $emitter = new Emitter([ 'host' => 'localhost', 'port' => '8443' ]); // Using the Redis extension provided client
+        $emitter->broadcast->emit('message', 'dxxxxxx');
     }
 
     public function whatsappTest()
