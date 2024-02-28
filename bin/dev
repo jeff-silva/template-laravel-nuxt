@@ -2,23 +2,23 @@
 
 reset
 
-folders=(
+dotenv_folders=(
   "."
-  "./.docker/backend"
-  "./.docker/frontend"
+  "./backend"
   "./.docker/mysql"
   "./.docker/phpmyadmin"
-  "./.docker/websocket"
+  "./frontend"
+  "./websocket"
 )
 
-for folder in "${folders[@]}"
+for dotenv_folder in "${dotenv_folders[@]}"
 do
-  if [ ! -f "${folder}/.env_example" ]; then
+  if [ ! -f "${dotenv_folder}/.env_example" ]; then
     continue
   fi
 
-  if [ ! -f "${folder}/.env" ]; then
-    cp "${folder}/.env_example" "${folder}/.env"
+  if [ ! -f "${dotenv_folder}/.env" ]; then
+    cp "${dotenv_folder}/.env_example" "${dotenv_folder}/.env"
   fi
 done
 

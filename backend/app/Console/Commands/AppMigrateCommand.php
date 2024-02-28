@@ -31,6 +31,8 @@ class AppMigrateCommand extends Command
      */
     public function handle()
     {
+        return;
+
         $models = array_map(function($file) {
             $file = str_replace('.php', '', $file);
             $file = str_replace(base_path('/app'), 'App', $file);

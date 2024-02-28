@@ -35,8 +35,8 @@ class AppTestCommand extends Command
     public function handle()
     {
         // $this->info('aaa');
-        // $this->whatsappTest();
-        $this->websocketTest();
+        $this->whatsappTest();
+        // $this->websocketTest();
     }
 
     public function websocketTest()
@@ -55,10 +55,41 @@ class AppTestCommand extends Command
 
     public function whatsappTest()
     {
-        $facebook_appid = '705141625145813';
-        $facebook_secret = '002174f1dd24d367fe01d9d7bfcbe33e';
-        $api_endpoint = "https://graph.facebook.com/v18.0/5531995271426/messages";
-        $this->info('whatsappTest');
+        // $facebook_appid = '705141625145813';
+        // $facebook_secret = '002174f1dd24d367fe01d9d7bfcbe33e';
+        // $api_endpoint = "https://graph.facebook.com/v18.0/5531995271426/messages";
+        // $this->info('whatsappTest');
+
+        $params=array(
+
+        );
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.ultramsg.com/instance79550/messages/chat",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => http_build_query([
+                'token' => 'hl244kvgwkk4c821',
+                'to' => '5531992021056',
+                'body' => 'Estou te enviando essa mensagem por uma API',
+            ]),
+            CURLOPT_HTTPHEADER => array(
+                "content-type: application/x-www-form-urlencoded"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        dump($response);
     }
 
     public function crudTest()
